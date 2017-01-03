@@ -1,0 +1,30 @@
+# Credentials of remote host.
+REMOTE_USER=''
+REMOTE_HOST=''
+
+# Credentials of remote database.
+REMOTE_DB_USER='';
+REMOTE_DB_PASS='';
+REMOTE_DB_NAME='';
+
+# Credentials of local host.
+LOCAL_DB_USER='';
+LOCAL_DB_PASS='';
+LOCAL_DB_NAME='';
+
+# View SQL file before it's inserted to local database?
+VIEW_SQLFILE='YES'
+#VIEW_SQLFILE='NO'
+
+# Go back and remove created SQL file on remote host?
+REMOVE_REMOTE_SQL='NO'
+#REMOVE_REMOTE_SQL='YES'
+
+# Remove downloaded SQL file on local host?
+REMOVE_LOCAL_SQL='NO'
+#REMOVE_LOCAL_SQL='YES'
+
+# If it's Wordpress database that you are fetching,
+# then you can make script automaticlly update database with site url.
+#WORDPRESS='YES'
+#LOCAL_SITE_URL='http://localhost/'
