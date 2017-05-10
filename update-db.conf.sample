@@ -3,11 +3,13 @@ REMOTE_USER=''
 REMOTE_HOST=''
 
 # Credentials of remote database.
+REMOTE_USER_HAS_PASS=true
 REMOTE_DB_USER='';
 REMOTE_DB_PASS='';
 REMOTE_DB_NAME='';
 
 # Credentials of local host.
+LOCAL_USER_HAS_PASS=true
 LOCAL_DB_USER='';
 LOCAL_DB_PASS='';
 LOCAL_DB_NAME='';

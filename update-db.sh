@@ -10,11 +10,17 @@ while [[ -z ${REMOTE_USER} ]]; do echo -n '> Enter username of remote server: ';
 while [[ -z ${REMOTE_HOST} ]]; do echo -n '> Enter host/IP of remote server: '; read REMOTE_HOST; done
 
 while [[ -z ${REMOTE_DB_USER} ]]; do echo -n '> Enter username of remote database: '; read REMOTE_DB_USER; done
-while [[ -z ${REMOTE_DB_PASS} ]]; do echo -n '> Enter password of remote database: '; read REMOTE_DB_PASS; done
+if [[ ${REMOTE_USER_HAS_PASS} -eq 1 ]]; then
+  while [[ -z ${REMOTE_DB_PASS} ]]; do echo -n '> Enter password of remote database: '; read REMOTE_DB_PASS; done
+  REMOTE_DB_PASS="--password=${REMOTE_DB_PASS}"
+fi
 while [[ -z ${REMOTE_DB_NAME} ]]; do echo -n '> Enter name of remote database: '; read REMOTE_DB_NAME; done
 
 while [[ -z ${LOCAL_DB_USER} ]]; do echo -n '> Enter username of local database: '; read LOCAL_DB_USER; done
-while [[ -z ${LOCAL_DB_PASS} ]]; do echo -n '> Enter password of local database: '; read LOCAL_DB_PASS; done
+if [[ ${LOCAL_USER_HAS_PASS} -eq 1 ]]; then
+  while [[ -z ${LOCAL_DB_PASS} ]]; do echo -n '> Enter password of local database: '; read LOCAL_DB_PASS; done
+  LOCAL_DB_PASS="--password=${LOCAL_DB_PASS}"
+fi
 while [[ -z ${LOCAL_DB_NAME} ]]; do echo -n '> Enter name of local database: '; read LOCAL_DB_NAME; done
 
 # Create unique filename by using timestamp that will be created in both remote and local location.
@@ -26,7 +32,7 @@ ssh-copy-id ${REMOTE_USER}@${REMOTE_HOST} 2> /dev/null
 
 # Command executed on remote host.
 ssh -T ${REMOTE_USER}@${REMOTE_HOST} <<END
-  mysqldump --user=${REMOTE_DB_USER} --password=${REMOTE_DB_PASS} ${REMOTE_DB_NAME} > ${SQL_FILE}
+  mysqldump --user=${REMOTE_DB_USER} ${REMOTE_DB_PASS} ${REMOTE_DB_NAME} > ${SQL_FILE}
 END
 
 # Quietly transporting file from remote host to local using scp.
@@ -43,7 +49,7 @@ echo -n '> Do you want to continue? (YES/NO): '; read ANSWER
 
 # If yes then import SQL file into local database.
 if [[ ${ANSWER} = 'YES' ]]; then
-  mysql --user=${LOCAL_DB_USER} --password=${LOCAL_DB_PASS} ${LOCAL_DB_NAME} < ${SQL_FILE}
+  mysql --user=${LOCAL_DB_USER} ${LOCAL_DB_PASS} ${LOCAL_DB_NAME} < ${SQL_FILE}
   if [[ "${?}" = '0' ]]; then
     echo '> Database import executed successfully.'
   fi
