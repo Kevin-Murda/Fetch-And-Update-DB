@@ -3,13 +3,13 @@ REMOTE_USER=''
 REMOTE_HOST=''
 
 # Credentials of remote database.
-REMOTE_USER_HAS_PASS=true
+REMOTE_USER_HAS_PASS=1
 REMOTE_DB_USER='';
 REMOTE_DB_PASS='';
 REMOTE_DB_NAME='';
 
 # Credentials of local host.
-LOCAL_USER_HAS_PASS=true
+LOCAL_USER_HAS_PASS=1
 LOCAL_DB_USER='';
 LOCAL_DB_PASS='';
 LOCAL_DB_NAME='';
@@ -27,6 +27,12 @@ REMOVE_LOCAL_SQL='NO'
 #REMOVE_LOCAL_SQL='YES'
 
 # If it's Wordpress database that you are fetching,
-# then you can make script automaticlly update database with site url.
+# then you can make script automatically update database with site url.
 #WORDPRESS='YES'
 #LOCAL_SITE_URL='http://localhost/'
+
+# If it's Magento database that you are fetching,
+# then you can make script automatically update database with site urls.
+#MAGENTO='YES'
+#LOCAL_SITE_URL_HTTP='http://localhost/'
+#LOCAL_SITE_URL_HTTP='https://localhost/'

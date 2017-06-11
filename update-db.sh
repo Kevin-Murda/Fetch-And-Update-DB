@@ -67,6 +67,18 @@ if [[ ${WORDPRESS} = 'YES' ]]; then
   fi
 fi
 
+# Magento specific options.
+if [[ ${MAGENTO} = 'YES' ]]; then
+  if [[ ! -z ${LOCAL_SITE_URL_HTTP} ]]; then
+    SQL="UPDATE core_config_data SET value = '${LOCAL_SITE_URL_HTTP}' WHERE path = 'web/unsecure/base_url'"
+    mysql --user=${LOCAL_DB_USER} --password=${LOCAL_DB_PASS} ${LOCAL_DB_NAME} -e "${SQL}"
+  fi
+  if [[ ! -z ${LOCAL_SITE_URL_HTTPS} ]]; then
+    SQL="UPDATE core_config_data SET value = '${LOCAL_SITE_URL_HTTPS}' WHERE path = 'web/secure/base_url'"
+    mysql --user=${LOCAL_DB_USER} --password=${LOCAL_DB_PASS} ${LOCAL_DB_NAME} -e "${SQL}"
+  fi
+fi
+
 # Remove remote SQL file?
 if [[ ${REMOVE_REMOTE_SQL} = 'YES' ]]; then
   ssh -T ${REMOTE_USER}@${REMOTE_HOST} "rm ${SQL_FILE}"
