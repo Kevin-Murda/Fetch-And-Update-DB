@@ -63,7 +63,7 @@ if [[ ${WORDPRESS} = 'YES' ]]; then
     if [[ ! -z ${LOCAL_SITE_URL} ]]; then
         SQL_ONE="UPDATE wp_options SET option_value = '${LOCAL_SITE_URL}' WHERE option_name = 'siteurl'"
         SQL_TWO="UPDATE wp_options SET option_value = '${LOCAL_SITE_URL}' WHERE option_name = 'home'"
-        mysql --user=${LOCAL_DB_USER} --password=${LOCAL_DB_PASS} ${LOCAL_DB_NAME} -e "${SQL_ONE}; ${SQL_TWO}"
+        mysql --user=${LOCAL_DB_USER} ${LOCAL_DB_PASS} ${LOCAL_DB_NAME} -e "${SQL_ONE}; ${SQL_TWO}"
     fi
 fi
 
@@ -71,11 +71,11 @@ fi
 if [[ ${MAGENTO} = 'YES' ]]; then
     if [[ ! -z ${LOCAL_SITE_URL_HTTP} ]]; then
         SQL="UPDATE core_config_data SET value = '${LOCAL_SITE_URL_HTTP}' WHERE path = 'web/unsecure/base_url'"
-        mysql --user=${LOCAL_DB_USER} --password=${LOCAL_DB_PASS} ${LOCAL_DB_NAME} -e "${SQL}"
+        mysql --user=${LOCAL_DB_USER} ${LOCAL_DB_PASS} ${LOCAL_DB_NAME} -e "${SQL}"
     fi
     if [[ ! -z ${LOCAL_SITE_URL_HTTPS} ]]; then
         SQL="UPDATE core_config_data SET value = '${LOCAL_SITE_URL_HTTPS}' WHERE path = 'web/secure/base_url'"
-        mysql --user=${LOCAL_DB_USER} --password=${LOCAL_DB_PASS} ${LOCAL_DB_NAME} -e "${SQL}"
+        mysql --user=${LOCAL_DB_USER} ${LOCAL_DB_PASS} ${LOCAL_DB_NAME} -e "${SQL}"
     fi
 fi
 
