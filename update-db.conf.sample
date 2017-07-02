@@ -35,4 +35,4 @@ REMOVE_LOCAL_SQL='NO'
 # then you can make script automatically update database with site urls.
 #MAGENTO='YES'
 #LOCAL_SITE_URL_HTTP='http://localhost/'
-#LOCAL_SITE_URL_HTTP='https://localhost/'
+#LOCAL_SITE_URL_HTTPS='https://localhost/'
