@@ -1,9 +1,10 @@
 #!/usr/bin/env powershell
 
+$config = @{}
+
 # If configure file exists, then execute it.
 if (Test-Path './update-db.conf') {
     $content = Import-Csv './update-db.conf' -Delimiter '=' -Header 'key','value'
-    $config = @{}
 
     foreach ($row in $content)
     {
@@ -11,6 +12,12 @@ if (Test-Path './update-db.conf') {
             continue
         }
 
-        $config[$row.key] = $row.value
+        $config[$row.key] = $row.value.Replace("'", '').Replace('"', '')
     }
+}
+
+
+# Prompt user for credentials if none provided.
+while ([string]::IsNullOrEmpty($config['REMOTE_USER'])) {
+    $config['REMOTE_USER'] = Read-Host '> Enter username of remote server'
 }
