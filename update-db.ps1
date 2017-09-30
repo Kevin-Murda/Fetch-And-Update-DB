@@ -21,3 +21,11 @@ if (Test-Path './update-db.conf') {
 while ([string]::IsNullOrEmpty($config['REMOTE_USER'])) {
     $config['REMOTE_USER'] = Read-Host '> Enter username of remote server'
 }
+
+while ([string]::IsNullOrEmpty($config['REMOTE_HOST'])) {
+    $config['REMOTE_USER'] = Read-Host '>  Enter host/IP of remote server'
+}
+
+while ([string]::IsNullOrEmpty($config['REMOTE_DB_USER'])) {
+    $config['REMOTE_DB_USER'] = Read-Host '>  Enter username of remote database'
+}
