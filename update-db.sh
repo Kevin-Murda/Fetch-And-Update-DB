@@ -32,6 +32,7 @@ ssh-copy-id ${REMOTE_USER}@${REMOTE_HOST} 2> /dev/null
 
 # Command executed on remote host.
 ssh -T ${REMOTE_USER}@${REMOTE_HOST} <<END
+    umask 077;
     mysqldump --user=${REMOTE_DB_USER} ${REMOTE_DB_PASS} ${REMOTE_DB_NAME} > ${SQL_FILE}
 END
 
